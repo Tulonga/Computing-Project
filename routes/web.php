@@ -29,11 +29,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('products.index');
+    })->name('dashboard');
+});
+
+
+require __DIR__.'/auth.php';
+
 
 Route::get('/products', [ProductsController::class, 'index'])->name('Products.index');
+
+Route::get('/products/{product}', [ProductsController::class, 'show'])->name('products.show');
 
 Route::get('/products/create', [ProductsController::class, 'create'])->name('Products.create');
 
 Route::post('/products', [ProductsController::class, 'store'])->name('Products.store');
+
+Route::get('/products/cart', [ProductsController::class, 'cart'])->name('Products.cart');
 
 require __DIR__.'/auth.php';
