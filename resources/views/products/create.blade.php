@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create</title>
+    @csrf
 </head>
 <body>
 
-<form method="post" action"{{route('Products.store')}}">
+<form method="post" action="{{route('Products.store')}}">
     <div>
         <label for="">Name</label>
         <input type="string" placeholder="name" />

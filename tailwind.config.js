@@ -1,14 +1,12 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
-
-/** @type {import('tailwindcss').Config} */
-export default {
-    content: [
+module.exports = {
+    purge: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.jsx',
     ],
+
+    darkMode: false, // or 'media' or 'class'
 
     theme: {
         extend: {
@@ -18,5 +16,12 @@ export default {
         },
     },
 
-    plugins: [forms],
-};
+    variants: {
+        extend: {},
+    },
+
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+    ],
+}

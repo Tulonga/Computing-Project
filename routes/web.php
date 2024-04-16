@@ -30,10 +30,12 @@ Route::get('/', function () {
 });
 
 
-Route::get('/products', [ProductsController::class, 'index'])->name('Products.index');
+Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
 
-Route::get('/products/create', [ProductsController::class, 'create'])->name('Products.create');
+Route::get('/products/create', [ProductsController::class, 'create'])->name('products.create');
 
-Route::post('/products', [ProductsController::class, 'store'])->name('Products.store');
+Route::post('/products', [ProductsController::class, 'store'])->name('products.store');
+
+Route::post('/products/product_page', [ProductsController::class, 'product_page'])->name('products.product_page');
 
 require __DIR__.'/auth.php';
