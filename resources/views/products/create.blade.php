@@ -7,7 +7,8 @@
 </head>
 <body>
 
-<form method="post" action"{{route('Products.store')}}">
+<form action="{{ route('products.store') }}" method="post">
+    @csrf
     <div>
         <label for="">Name</label>
         <input type="string" placeholder="name" />
@@ -44,7 +45,7 @@
     <br>
 
     <div>
-        <input type="submit" value="Save A New Product">
+        <button type="submit">Create Product</button>
     </div>
    
 </form>

@@ -35,21 +35,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
-
-require __DIR__.'/auth.php';
-
-
 Route::get('/products', [ProductsController::class, 'index'])->name('Products.index');
 
-Route::get('/products/{product}', [ProductsController::class, 'show'])->name('products.show');
+Route::get('/{product}', [ProductsController::class, 'show'])->name('products.show');
 
-Route::get('/products/create', [ProductsController::class, 'create'])->name('Products.create');
+Route::get('products/create', [ProductsController::class, 'create'])->name('products.create');
 
-Route::post('/products', [ProductsController::class, 'store'])->name('Products.store');
+Route::get('/{product}/edit', [ProductsController::class, 'edit'])->name('products.edit');
+
+Route::put('/{product}', [ProductsController::class, 'update'])->name('products.update');
+
+Route::delete('/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
+
+Route::post('/products', [ProductsController::class, 'store'])->name('products.store');
 
 Route::get('/products/cart', [ProductsController::class, 'cart'])->name('Products.cart');
 
 Route::post('/products/{product}/add-to-cart', [ProductsController::class, 'addToCart'])->name('products.addToCart');
 
+Route::resource('products', ProductsController::class);
 
 require __DIR__.'/auth.php';
