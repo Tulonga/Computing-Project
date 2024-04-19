@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductsController;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -48,5 +48,8 @@ Route::get('/products/create', [ProductsController::class, 'create'])->name('Pro
 Route::post('/products', [ProductsController::class, 'store'])->name('Products.store');
 
 Route::get('/products/cart', [ProductsController::class, 'cart'])->name('Products.cart');
+
+Route::post('/products/{product}/add-to-cart', [ProductsController::class, 'addToCart'])->name('products.addToCart');
+
 
 require __DIR__.'/auth.php';
