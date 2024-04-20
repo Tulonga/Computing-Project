@@ -7,12 +7,12 @@ use Inertia\Inertia;
 use App\Http\Controllers\ProductsController;
 
 // Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
+    // return Inertia::render('Welcome', [
+    //     'canLogin' => Route::has('login'),
+    //     'canRegister' => Route::has('register'),
+    //     'laravelVersion' => Application::VERSION,
+    //     'phpVersion' => PHP_VERSION,
+    // ]);
 // });
 
 Route::get('/dashboard', function () {
@@ -26,7 +26,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -39,7 +44,7 @@ Route::get('/products', [ProductsController::class, 'index'])->name('Products.in
 
 Route::get('/{product}', [ProductsController::class, 'show'])->name('products.show');
 
-Route::get('products/create', [ProductsController::class, 'create'])->name('products.create');
+Route::get('/create', [ProductsController::class, 'create'])->name('products.create');
 
 Route::get('/{product}/edit', [ProductsController::class, 'edit'])->name('products.edit');
 

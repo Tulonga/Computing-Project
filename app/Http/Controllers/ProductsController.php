@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Products;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Contracts\Support\ValidatedData;
 
 class ProductsController extends Controller
 {
@@ -35,30 +37,34 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
+        dd($request);
+
         $validatedData = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'product_name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'min:0.01'],
             'stock_quantity' => ['required', 'integer', 'min:0'],
             'category_id' => ['required', 'exists:categories,id'],
+            'image_url' => ['required', 'url'] 
         ]);
 
         $product = Products::create($validatedData);
 
         return redirect()->route('products.index')
             ->with('success', 'Product created successfully.');
-
+            
     }
 
     public function create()
     {
-        return view('products.create');
+        return view('products.index');
     }
 
-    public function show($id)
+    public function show(Products $product)
     {
-        $product = Products::findOrFail($id);
         return view('products.show', compact('product'));
     }
 
+
 }
+
