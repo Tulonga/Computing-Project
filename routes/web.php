@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\CartController;
 
 // Route::get('/', function () {
     // return Inertia::render('Welcome', [
@@ -59,5 +60,11 @@ Route::get('/products/cart', [ProductsController::class, 'cart'])->name('Product
 Route::post('/products/{product}/add-to-cart', [ProductsController::class, 'addToCart'])->name('products.addToCart');
 
 Route::resource('products', ProductsController::class);
+
+Route::get('api/cart', [CartController::class, 'index'])->name('cart.index');
+
+Route::put('api/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+
+Route::delete('api/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 require __DIR__.'/auth.php';
