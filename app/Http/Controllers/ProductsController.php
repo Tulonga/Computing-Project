@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Contracts\Support\ValidatedData;
+use Illuminate\Support\Facades\Http;
 
 class ProductsController extends Controller
 {
@@ -50,20 +51,25 @@ class ProductsController extends Controller
 
         $product = Products::create($validatedData);
 
-        return redirect()->route('products.index')
-            ->with('success', 'Product created successfully.');
+        
+
             
     }
 
     public function create()
     {
-        return view('products.index');
+        return view('products.create');
     }
 
     public function show(Products $product)
     {
         return view('products.show', compact('product'));
     }
+
+    public function cart(Products $product)
+        {
+            return view('products.cart');
+        }
 
 
 }

@@ -11,7 +11,7 @@
     <form action="{{ route('products.store') }}" method="post" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
         @csrf
         <div class="mb-4">
-            <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
+            <label for="product_name" class="block text-gray-700 font-bold mb-2">Name</label>
             <input type="text" id="product_name" name="product_name" placeholder="Enter name" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
         </div>
 
