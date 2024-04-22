@@ -27,13 +27,24 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('welcome', [
+    return Inertia::render('welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
+
+Route::get('/login', function () {
+    return Inertia::render('Auth/Login');
+})->name('login');
+
+Route::post('/login', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store'])->name('login.store');
+
+Route::get('/register', function () {
+    return Inertia::render('Auth/Register');
+})->name('register');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -59,7 +70,7 @@ Route::get('/products/cart', [ProductsController::class, 'cart'])->name('Product
 
 Route::post('/products/{product}/add-to-cart', [ProductsController::class, 'addToCart'])->name('products.addToCart');
 
-Route::resource('products', ProductsController::class);
+// Route::resource('products', ProductsController::class);
 
 Route::get('api/cart', [CartController::class, 'index'])->name('cart.index');
 
